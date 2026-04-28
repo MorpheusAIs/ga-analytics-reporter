@@ -1,0 +1,23 @@
+{
+  "name": "ga-analytics-reporter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Weekly Google Analytics 4 reporter via Vercel serverless function",
+  "author": "BowTiedSwan <bowtiedswan@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "test:local": "node scripts/run-local.js"
+  },
+  "dependencies": {
+    "@google-analytics/data": "latest",
+    "google-auth-library": "latest"
+  },
+  "optionalDependencies": {
+    "vercel": "latest"
+  }
+}

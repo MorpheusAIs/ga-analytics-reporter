@@ -1,0 +1,27 @@
+# Weekly GA Report trigger
+#
+# Required GitHub repo secrets:
+#   REPORT_WEBHOOK_URL  — Full Vercel production URL ending in /api/report
+#                         e.g. https://ga-analytics-reporter.vercel.app/api/report
+#   WEBHOOK_SECRET      — Must match the WEBHOOK_SECRET env var set in Vercel
+
+name: Weekly GA Report
+
+on:
+  schedule:
+    - cron: '0 9 * * 2'   # Every Tuesday at 09:00 UTC
+  workflow_dispatch:        # Manual trigger for testing
+
+jobs:
+  trigger:
+    name: Trigger Vercel report function
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST to report endpoint
+        run: |
+          curl --fail-with-body \
+            -fsS \
+            -X POST \
+            -H "x-webhook-secret: ${{ secrets.WEBHOOK_SECRET }}" \
+            -H "content-type: application/json" \
+            "${{ secrets.REPORT_WEBHOOK_URL }}"
