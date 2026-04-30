@@ -19,8 +19,7 @@ jobs:
     steps:
       - name: POST to report endpoint
         run: |
-          curl --fail-with-body \
-            -fsS \
+          curl --fail-with-body -sS \
             -X POST \
             -H "x-webhook-secret: ${{ secrets.WEBHOOK_SECRET }}" \
             -H "content-type: application/json" \
