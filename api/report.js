@@ -39,8 +39,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { propertiesProcessed, propertiesFailed } = await runReport();
-    return res.status(200).json({ ok: true, propertiesProcessed, propertiesFailed, slackPosted: true });
+    const { propertiesProcessed, propertiesFailed, xFollowerSnapshot } = await runReport();
+    return res.status(200).json({ ok: true, propertiesProcessed, propertiesFailed, slackPosted: true, xFollowerSnapshot });
   } catch (err) {
     console.error('[ga-reporter] runReport failed:', err);
     await postErrorToSlack(process.env.SLACK_WEBHOOK_URL, err);
